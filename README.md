@@ -40,7 +40,9 @@ To get started you can use a simulator which runs on the terminal.
 
 Once you have the animation/game/wierd idea ready and need to test it on the actual thing, just change the shifter to an object of `BlinkenWindow::Shifters::GPIOShifter`
 
-    screen = BlinkenWindow::Screen.new(6,10, BlinkenWindow::Shifters::TerminalShifter.new(6,10))
+    screen = BlinkenWindow::Screen.new(6,10, BlinkenWindow::Shifters::GPIOShifter.new(6,10))
+
+**NB: `BlinkenWindow::Shifters::GPIOShifter` requires `wiringpi` gem, and you will need Raspberry Pi to run it.**
 
 ## Examples
 
