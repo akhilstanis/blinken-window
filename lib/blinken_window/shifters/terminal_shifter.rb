@@ -10,6 +10,9 @@ module BlinkenWindow::Shifters
     def initialize(maxx, maxy, width=8, height=4)
       @maxx, @maxy, @width, @height = maxx, maxy, width, height
       init_screen
+      nonl
+      cbreak
+      noecho
     end
 
     def push(matrix)
