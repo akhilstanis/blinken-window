@@ -286,7 +286,7 @@ class BlinkenString < String
   end
 
   def reel
-    self.frames.inject([[],[],[],[],[],[],[],[]]) { |mem,char| mem.zip(char).collect(&:flatten) }
+    self.frames.inject([[],[],[],[],[],[],[],[],[],[]]) { |mem,char| mem.zip(char).collect(&:flatten) }
   end
 
   def scroll
