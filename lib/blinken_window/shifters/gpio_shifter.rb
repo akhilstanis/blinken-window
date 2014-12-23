@@ -16,7 +16,7 @@ module BlinkenWindow::Shifters
     end
 
     def push(matrix)
-      serialize(matrix).bits.each do |bit|
+      serialize(matrix).each do |bit|
         io.write(data_pin, bit)
         tick
       end
