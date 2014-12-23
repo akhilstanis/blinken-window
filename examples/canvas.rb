@@ -86,7 +86,22 @@ __END__
         // Tablets better use touchstart for more responsive experience
         // $('.box').on('touchstart', toggleBulb);
         // $('.clear').on('touchstart', clearScreen);
+
+        // Debug
+        $('.box').click(function(){
+          var matrix = $('.window > div').
+            map(function(i,box){ return $(box).hasClass('on') ? '1' : '0' }).
+            toArray().
+            join('').
+            split(/(\d{6})/).
+            filter(function(bits){ return bits != '' }).
+            map(function(bits,i){ return bits.split('').map(function(str, i){ return parseInt(str); }) });
+
+          $('#con').text(JSON.stringify(matrix));
+        });
       });
+
+
     </script>
   </head>
   <body>
@@ -154,6 +169,8 @@ __END__
     </div>
     <div class="controls">
       <button class="clear">Clear</button>
+      <button class="tojson">toJSON</button>
+      <pre id='con' style="width:100%; word-wrap: break-word; font-size: 18px;"></pre>
     </div>
   </body>
 </html>
