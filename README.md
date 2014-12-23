@@ -50,6 +50,8 @@ Also checkout the examples folder to start playing around
 
   * canvas.rb -  A web interface to control the bulbs.
   * blm_player.rb - A simple blm palyer which can play blinken movies
+  * pong.rb - Class pong game that can be controlled using keyboard or websocked client
+  * blinken_string.rb - A string class which can easily generate frames to animate text on blinken window
 
 ## Contributing
 
