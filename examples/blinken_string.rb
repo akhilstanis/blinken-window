@@ -317,28 +317,31 @@ class BlinkenString < String
   end
 end
 
-require 'blinken_window/screen'
-width, height = 6, 10
+# Run demo if current file is executed
+if __FILE__ =~ /#{$PROGRAM_NAME}/
 
+  require 'blinken_window/screen'
+  width, height = 6, 10
 
-require 'blinken_window/shifters/terminal_shifter'
-screen = BlinkenWindow::Screen.new(width, height, BlinkenWindow::Shifters::TerminalShifter.new(width, height))
+  require 'blinken_window/shifters/terminal_shifter'
+  screen = BlinkenWindow::Screen.new(width, height, BlinkenWindow::Shifters::TerminalShifter.new(width, height))
 
-# require 'blinken_window/shifters/gpio_shifter'
-# screen = BlinkenWindow::Screen.new(width, height, BlinkenWindow::Shifters::GPIOShifter.new(5,4,6))
+  # require 'blinken_window/shifters/gpio_shifter'
+  # screen = BlinkenWindow::Screen.new(width, height, BlinkenWindow::Shifters::GPIOShifter.new(5,4,6))
 
-BlinkenString.new('h e l l o w o r l d !').frames.each do |frame|
-  screen.paint(frame)
-  sleep(1)
+  BlinkenString.new('h e l l o w o r l d !').frames.each do |frame|
+    screen.paint(frame)
+    sleep(1)
+  end
+
+  BlinkenString.new('hello world').scroll do |frame|
+    screen.paint(frame)
+    sleep(0.3)
+  end
+
+  BlinkenString.new('hello world').vscroll do |frame|
+    screen.paint(frame)
+    sleep(0.3)
+  end
+
 end
-
-BlinkenString.new('hello world').scroll do |frame|
-  screen.paint(frame)
-  sleep(0.3)
-end
-
-BlinkenString.new('hello world').vscroll do |frame|
-  screen.paint(frame)
-  sleep(0.3)
-end
-
