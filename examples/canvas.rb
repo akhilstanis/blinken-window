@@ -1,6 +1,32 @@
 
-require 'blinken_window/shifters/terminal_shifter'
-require 'blinken_window/screen'
+class ScreenManager
+  def initialize
+    screen.clear
+  end
+
+  def screen
+    @screen ||= begin
+      require 'blinken_window/screen'
+
+      require 'blinken_window/shifters/terminal_shifter'
+      BlinkenWindow::Screen.new(6,10, BlinkenWindow::Shifters::TerminalShifter.new(6,10))
+
+      # require 'blinken_window/shifters/gpio_shifter'
+      # BlinkenWindow::Screen.new(6, 10, BlinkenWindow::Shifters::GPIOShifter.new(5,4,6))
+    end
+  end
+
+  def process(msg)
+    case msg
+    when /clear/
+      screen.clear
+    when /\d,\d,\d/
+      screen.put(*msg.split(',').collect(&:to_i))
+    end
+  end
+end
+
+# Begin sinatra...
 
 require 'sinatra'
 require 'sinatra-websocket'
@@ -9,22 +35,6 @@ set :server, 'thin'
 set :bind, '0.0.0.0'
 set :sockets, []
 set :logging, false # Terminal emulator works best when logging if off
-
-class ScreenManager
-  def initialize
-    @screen = BlinkenWindow::Screen.new(6,10, BlinkenWindow::Shifters::TerminalShifter.new(6,10))
-    @screen.clear
-  end
-
-  def process(msg)
-    case msg
-    when /clear/
-      @screen.clear
-    when /\d,\d,\d/
-      @screen.put(*msg.split(',').collect(&:to_i))
-    end
-  end
-end
 
 
 get '/' do

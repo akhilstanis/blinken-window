@@ -59,13 +59,21 @@ class Pong
 
 
   def screen
-    @screen ||= BlinkenWindow::Screen.new(width, height, BlinkenWindow::Shifters::TerminalShifter.new(width, height))
+    @screen ||= begin
+      require 'blinken_window/screen'
+
+      require 'blinken_window/shifters/terminal_shifter'
+      BlinkenWindow::Screen.new(width, height, BlinkenWindow::Shifters::TerminalShifter.new(width, height))
+
+      # require 'blinken_window/shifters/gpio_shifter'
+      # BlinkenWindow::Screen.new(width, height, BlinkenWindow::Shifters::GPIOShifter.new(5,4,6))
+    end
   end
 
 end
 
 class Bat
-  def initialize(maxx, y, width=1)
+  def initialize(maxx, y, width=2)
     @maxx  = maxx
     @y = y
     @width = width
@@ -159,9 +167,6 @@ class Ball
     @maxy ||= @settings[:maxy]
   end
 end
-
-require 'blinken_window/shifters/terminal_shifter'
-require 'blinken_window/screen'
 
 # Control using input from terminal
 # puts "Instructions: Press 'a' to move left and 's' to move right.\nPress enter to continue..."
