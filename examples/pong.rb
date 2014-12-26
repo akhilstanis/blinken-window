@@ -8,6 +8,8 @@
 
 =end
 
+require_relative 'blinken_string'
+
 class Pong
   attr_reader :width, :height, :speed
 
@@ -16,12 +18,25 @@ class Pong
   end
 
   def run
+    BlinkenString.new('123').frames.each do |frame|
+      screen.paint(frame)
+      sleep(1)
+    end
+    screen.clear
+
     yield self if block_given?
 
     loop do
       break if ball.out?
       moveball
       sleep(speed)
+    end
+
+    2.times do
+      BlinkenString.new('GAME OVER! ').scroll do |frame|
+        screen.paint(frame)
+        sleep(0.08)
+      end
     end
 
     screen.clear
