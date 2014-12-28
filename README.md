@@ -2,9 +2,10 @@
 
 A simple ruby library to control the blinken lights setup on my front window. :)
 
-<a href='https://asciinema.org/a/14974?autoplay=1' target='_blank'><img src='https://cloud.githubusercontent.com/assets/955760/5542335/07769048-8b0b-11e4-9f44-b34fe9a41c8b.png' width='200' /></a>
+<a href='https://www.youtube.com/watch?v=FQo2XVC0iSQ' target='_blank'><img src='https://cloud.githubusercontent.com/assets/955760/5564442/261ab332-8ee7-11e4-8480-2f0c218a6655.png' height='250' /></a>
+<a href='https://asciinema.org/a/14974?autoplay=1' target='_blank'><img src='https://cloud.githubusercontent.com/assets/955760/5542335/07769048-8b0b-11e4-9f44-b34fe9a41c8b.png' height='250' /></a>
 
-Simulator running the demo.
+Video of the actual window and simulator running the demo.
 
 ## Installation
 
