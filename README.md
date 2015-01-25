@@ -53,11 +53,11 @@ Once you have the animation/game/wierd idea ready and need to test it on the act
 
 Also checkout the examples folder to start playing around
 
-  * canvas.rb -  A web interface to control the bulbs.
-  * blm_player.rb - A simple blm palyer which can play blinken movies
-  * pong.rb - Class pong game that can be controlled using keyboard or websocked client
-  * blinken_string.rb - A string class which can easily generate frames to animate text on blinken window
-  * matrix.rb - Using matrices to generate frames with patterns really fast
+  * [canvas.rb](https://github.com/akhilstanislavose/blinken-window/blob/master/examples/canvas.rb) -  A web interface to control the bulbs.
+  * [blm_player.rb](https://github.com/akhilstanislavose/blinken-window/blob/master/examples/blm_player.rb) - A simple blm palyer which can play blinken movies
+  * [pong.rb](https://github.com/akhilstanislavose/blinken-window/blob/master/examples/pong.rb) - Class pong game that can be controlled using keyboard or websocked client
+  * [blinken_string.rb](https://github.com/akhilstanislavose/blinken-window/blob/master/examples/blinken_string.rb) - A string class which can easily generate frames to animate text on blinken window
+  * [matrix.rb](https://github.com/akhilstanislavose/blinken-window/blob/master/examples/matrix.rb) - Using matrices to generate frames with patterns really fast
 
 By default all the example are set to use terminal emulator so that you can see the output. Some example use web interface to control them so open up the browser.
 
@@ -67,6 +67,18 @@ By default all the example are set to use terminal emulator so that you can see 
     bundle exec ruby examples/blinken_string.rb
 
 **NB: Terminal emulator is implemented using curses library, which used to be part of Ruby standard library till 2.0, so you will have to run the examples using version not greater than 2.0**
+
+## Hardware
+The requirement was to connect 60 leds to Raspberry Pi, but it doesn't have that many GPIO pins. So the solution was to use an output exapnder, which could provide 60 outputs. Easisest way to do that is to use Shift Registers with latch option, they act as a serial to parallel converter. We can stream the serial data in to the shift register and it will set its outputs corresponding to the bits received. Standard shift registers(CD4094, 74HC595) are 8bits ie., 8 outputs, but by cascading 8 of them we can have 64 outputs. Below is a snap a of expander board I built.
+
+<a href='https://cloud.githubusercontent.com/assets/955760/5890923/e5f48db8-a49a-11e4-929b-4f0f48dff38e.JPG' target='_blank'><img src='https://cloud.githubusercontent.com/assets/955760/5890923/e5f48db8-a49a-11e4-929b-4f0f48dff38e.JPG' width='100%' /></a>
+
+Along with the shift register I also had to use transitors to drive the LEDs as the shift registers couldn't provide enough current to drive the 50mA LEDs I used. To make the project extensible, I have designed a simple module which can be connected like legos and you can extend the number of outputs as per your requirment.
+
+<a href='https://cloud.githubusercontent.com/assets/955760/5890875/8682e50c-a498-11e4-9b8c-3297258aa1be.png' target='_blank'><img src='https://cloud.githubusercontent.com/assets/955760/5890875/8682e50c-a498-11e4-9b8c-3297258aa1be.png' height='300' /></a>
+<a href='https://cloud.githubusercontent.com/assets/955760/5890874/867b4edc-a498-11e4-9a2b-b43e0995720c.png' target='_blank'><img src='https://cloud.githubusercontent.com/assets/955760/5890874/867b4edc-a498-11e4-9a2b-b43e0995720c.png' height='300' /></a>
+
+The module idea came late to me as my friends asked me the easiest way to make thier windows blink without all the soldering and stuff. I am in the process of fabricating the actual PCBs and once it is done, I will put some pictures of it. You can download the Eagle files from [http://goo.gl/GG7Nz7](http://goo.gl/GG7Nz7)
 
 ## Contributing
 
